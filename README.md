@@ -22,15 +22,17 @@ I created my folder named Terraform under the following path: C:\HashiCorp\Terra
 3. Move the downloaded executable in this directory
 ![](./png//screenshots/terraform-dir.PNG)  
 
-4. Add this directory path to the PATH variable   
+4. Add this directory path to the PATH environment variable   
 ![](./png/screenshots/terraform-path-var.PNG)
 
 5. Click OK to apply all changes.
 
-Terraform should now correctly be installed. Open Powershell or cmd.exe and check for the terraform version with `terraform version`
+Terraform should now correctly be installed. Open Powershell or cmd.exe and check for the terraform version with `terraform version`  
 ![](./png/screenshots/terraform-version.PNG)
 
+# Create an AWS Access Key
 
+# Add Terraform extension in VS Code
 # Config
 ## Testing
 ## Reflection
