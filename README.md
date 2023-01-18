@@ -95,5 +95,29 @@ I will use the profile name "tbz-project"
 6. On Windows enter the command `$env:AWS_PROFILE="tbz-project"`  
 on Linux or MacOS you can use `export AWS_PROFILE=tbz-project`
 
+# Terraform infrastructure configuration
+
+## Provider Registry
+Terraform has a website with documentations for most cloud providers and how to deploy their resources using terraform.
+
+![](./png/screenshots/terraform-providers.PNG)
+URL: https://registry.terraform.io/
+
+For provisioning infrastructure in AWS a provider block has to be specified in the beginning of the configuration.
+
+In the documentation it's showing us already how to use the provider block  
+
+![](./png/screenshots/terraform-provider-block.PNG)
+
+this configuration block can be copy & pasted in a terraform file ending with .tf for example in a file called main.tf or provider.tf.
+
+This can be done for all the other resources (VMs, VPCs, Subnets, Security gropus etc.)  
+Every resource should have a documentation with an example configuration that can be used and adjusted.
+
+## My Configuration
+
+[main.tf](./infrastructure/main.tf)
+
+# Deploying terraform infrastructure
 ## Testing
 ## Reflection
