@@ -20,7 +20,7 @@ I want to create 2 VMs in the same VPC but in 2 different subnets. Each VM will 
 1. Open Powershell or cmd.exe and enter the following command:  
 `msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi`  
 
-An AWS Installer will appear
+An AWS Installer will appear  
 ![](./png/screenshots/aws-cli-installer.PNG)
 
 2. Click **Next**
@@ -55,7 +55,7 @@ To get help with syntax validation or code formatting it is strongly recommended
 
 The extension is called "HashiCorp Terraform" and can be found in the Visual Studio Code Marketplace through the Extensions Tab.  
 
-![](./png/screenshots/vscode-ext.PNG)
+![](./png/screenshots/vscode-ext.PNG)  
 The extension can also be downloaded directly through this link:
 https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform
 
