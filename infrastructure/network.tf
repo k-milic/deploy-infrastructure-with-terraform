@@ -8,14 +8,14 @@ resource "aws_vpc" "vpc" {
   cidr_block           = var.vpc_cidr_block
   enable_dns_hostnames = var.enable_dns_hostnames
 
-  tags = local.projects
+  tags = local.common_tags
 }
 
 # Creates an Internet Gateway
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
 
-  tags = local.projects
+  tags = local.common_tags
 }
 
 # Creates Subnet 1
@@ -25,7 +25,7 @@ resource "aws_subnet" "subnet1" {
   map_public_ip_on_launch = var.map_public_ip_on_launch
   availability_zone       = data.aws_availability_zones.available.names[0]
 
-  tags = local.projects
+  tags = local.common_tags
 }
 
 # Creates Subnet 2
@@ -35,7 +35,7 @@ resource "aws_subnet" "subnet2" {
   map_public_ip_on_launch = var.map_public_ip_on_launch
   availability_zone       = data.aws_availability_zones.available.names[1]
 
-  tags = local.projects
+  tags = local.common_tags
 }
 
 ### ROUTING ###
@@ -47,7 +47,7 @@ resource "aws_route_table" "rtb" {
     gateway_id = aws_internet_gateway.igw.id
   }
 
-  tags = local.projects
+  tags = local.common_tags
 }
 
 resource "aws_route_table_association" "rta-subnet1" {
@@ -82,7 +82,7 @@ resource "aws_security_group" "alb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = local.projects
+  tags = local.common_tags
 
 }
 
@@ -107,5 +107,5 @@ resource "aws_security_group" "nginx-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = local.projects
+  tags = local.common_tags
 }

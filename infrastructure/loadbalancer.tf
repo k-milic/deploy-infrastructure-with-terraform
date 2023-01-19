@@ -15,7 +15,7 @@ resource "aws_lb" "nginx" {
     enabled = true
   }
 
-  tags = local.projects
+  tags = local.common_tags
 }
 
 resource "aws_lb_target_group" "nginx" {
@@ -24,7 +24,7 @@ resource "aws_lb_target_group" "nginx" {
   protocol = "HTTP"
   vpc_id   = aws_vpc.vpc.id
 
-  tags = local.projects
+  tags = local.common_tags
 }
 
 resource "aws_lb_listener" "nginx" {
@@ -37,7 +37,7 @@ resource "aws_lb_listener" "nginx" {
     target_group_arn = aws_lb_target_group.nginx.arn
   }
 
-  tags = local.projects
+  tags = local.common_tags
 }
 
 resource "aws_lb_target_group_attachment" "nginx1" {

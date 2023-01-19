@@ -21,7 +21,7 @@ sudo rm /usr/share/nginx/html/index.html
 sudo cp /home/ec2-user/index.html /usr/share/nginx/html/index.html
 EOF
 
-  tags = local.projects
+  tags = local.common_tags
 
 }
 
@@ -40,6 +40,6 @@ sudo rm /usr/share/nginx/html/index.html
 sudo cp /home/ec2-user/index.html /usr/share/nginx/html/index.html
 EOF
 
-  tags = local.projects
+  tags = local.common_tags
 
 }

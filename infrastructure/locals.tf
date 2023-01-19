@@ -5,9 +5,11 @@ resource "random_integer" "rand" {
 }
 
 locals {
-  projects = var.project
+  common_tags = {
+    project = "${var.project}"
+  }
 
-  s3_bucket_name = "webserver-${random.integer.rand.result}"
+  s3_bucket_name = "webserver-${random_integer.rand.result}"
 }
 
 

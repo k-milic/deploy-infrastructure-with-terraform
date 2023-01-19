@@ -18,14 +18,14 @@ resource "aws_iam_role" "allow_nginx_s3" {
 }
 EOF
 
-  tags = local.projects
+  tags = local.common_tags
 }
 
 resource "aws_iam_instance_profile" "nginx_profile" {
   name = "nginx_profile"
   role = aws_iam_role.allow_nginx_s3.name
 
-  tags = local.projects
+  tags = local.common_tags
 }
 
 resource "aws_iam_role_policy" "allow_s3_all" {
@@ -94,7 +94,7 @@ resource "aws_s3_bucket" "web_bucket" {
 }
     POLICY
 
-  tags = local.projects
+  tags = local.common_tags
 
 }
 
@@ -103,6 +103,6 @@ resource "aws_s3_bucket_object" "website" {
   key    = "/website/index.html"
   source = "./website/index.html"
 
-  tags = local.projects
+  tags = local.common_tags
 
 }
