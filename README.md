@@ -119,5 +119,18 @@ Every resource should have a documentation with an example configuration that ca
 [main.tf](./infrastructure/main.tf)
 
 # Deploying terraform infrastructure
+
+`terraform init`
+![](./png/screenshots/terraform-init.PNG)
+`terraform fmt`
+`terraform validate`
+![](./png/screenshots/terraform-validate-error.PNG)
+
+![](./png/screenshots/terraform-validate-success.PNG)
+`terraform plan`
+![](./png/screenshots/terraform-plan.PNG)
+
+`terraform apply`
+
 ## Testing
 ## Reflection
