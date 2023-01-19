@@ -5,11 +5,16 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 4.50.0"
     }
+    # This provider will be used to generate random numbers in the configuration
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.4.3"
+    }
   }
 }
 
 # Sets the region for the provider
 provider "aws" {
-  region = "us-east-1"
+  region = var.aws_region
 }
 

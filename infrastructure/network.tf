@@ -1,49 +1,53 @@
+# Gets data about the available AZs
+data "aws_availability_zones" "available" {}
+
+### NETWORKING ###
+
+# Creates a VPC
 resource "aws_vpc" "vpc" {
-  cidr_block           = "10.0.0.0/16"
-  enable_dns_hostnames = true
+  cidr_block           = var.vpc_cidr_block
+  enable_dns_hostnames = var.enable_dns_hostnames
+
+  tags = local.projects
 }
 
+# Creates an Internet Gateway
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
 
-  tags = {
-    Name = "iwg"
-  }
+  tags = local.projects
 }
 
+# Creates Subnet 1
 resource "aws_subnet" "subnet1" {
+  cidr_block              = var.vpc_subnets_cidr_blocks[0]
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = "10.0.0.0/24"
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = var.map_public_ip_on_launch
+  availability_zone       = data.aws_availability_zones.available.names[0]
 
-  tags = {
-    Name = "Main"
-  }
+  tags = local.projects
 }
 
+# Creates Subnet 2
 resource "aws_subnet" "subnet2" {
+  cidr_block              = var.vpc_subnets_cidr_blocks[1]
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = "10.0.1.0/24"
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = var.map_public_ip_on_launch
+  availability_zone       = data.aws_availability_zones.available.names[1]
 
-  tags = {
-    Name = "Main"
-  }
+  tags = local.projects
 }
 
-# Routing
-
+### ROUTING ###
 resource "aws_route_table" "rtb" {
   vpc_id = aws_vpc.vpc.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block = var.route_table_cidr_block
     gateway_id = aws_internet_gateway.igw.id
   }
 
-  tags = {
-    Name = "route table"
-  }
+  tags = local.projects
 }
 
 resource "aws_route_table_association" "rta-subnet1" {
@@ -56,24 +60,52 @@ resource "aws_route_table_association" "rta-subnet2" {
   route_table_id = aws_route_table.rtb.id
 }
 
-
-
-# Security groups
-resource "aws_default_security_group" "nginx-sg" {
+### SECURITY GROUPS ###
+# ALB Security Group
+resource "aws_security_group" "alb_sg" {
+  name   = "nginx_alb_sg"
   vpc_id = aws_vpc.vpc.id
 
-  # HTTP access from anywhere
+  #Allow HTTP from anywhere
   ingress {
-    protocol    = "tcp"
     from_port   = 80
     to_port     = 80
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  # Outbound internet access
+
+  #allow all outbound
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = local.projects
+
+}
+
+# Nginx security group 
+resource "aws_security_group" "nginx-sg" {
+  name   = "nginx_sg"
+  vpc_id = aws_vpc.vpc.id
+
+  # HTTP access from VPC
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_cidr_block]
+  }
+
+  # outbound internet access
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = local.projects
 }
