@@ -131,6 +131,8 @@ For security reasons I also added an .gitignore file, so my local state file and
 
 [locals.tf](https://github.com/k-milic/deploy-infrastructure-with-terraform/blob/main/infrastructure/locals.tf)
 
+[variables.tf](https://github.com/k-milic/deploy-infrastructure-with-terraform/blob/main/infrastructure/variables.tf)
+
 [outputs.tf](https://github.com/k-milic/deploy-infrastructure-with-terraform/blob/main/infrastructure/outputs.tf)
 
 ### Website file
@@ -138,11 +140,14 @@ For security reasons I also added an .gitignore file, so my local state file and
 
 # Deploying terraform infrastructure
 
+## Terraform init
 After creating a terraform directory and terraform configuration files you can run the command `terraform init` to initialize the provider plugins and the backend for the terraform state file.  
 ![](./png/screenshots/terraform-init.PNG)
 
-Running the command `terraform fmt` will format the congifuration to comply with the HCL formatting. This command is pretty much unnecessary if the HashiCorp Terraform extension for VC Code mentioned above is installed. The extensions is already taking care of the formatting if the file gets saved.
+## Terraform fmt
+Running the command `terraform fmt` will format the congifuration to comply with the HCL formatting. This command is pretty much unnecessary if the HashiCorp Terraform extension for VC Code mentioned above is installed. The extension is already taking care of the formatting if the file gets saved.
 
+## Terraform validate
 The command `terraform validate` is checking if the congifuration is valid. It checks if the configuration makes sense and if all necessary informations are provided in the configuration and if the syntaxes and data types are correct.  
 
 If ther configuration is not valid, it will show where the error was found and what the possible error might be.
@@ -150,11 +155,29 @@ If ther configuration is not valid, it will show where the error was found and w
 Here it was looking for a string and I didn't use "" around ***tcp*** to specify it as a string.
 ![](./png/screenshots/terraform-validate-error.PNG)
 
+If the configuration is valid, it should give out following message:  
+
 ![](./png/screenshots/terraform-validate-success.PNG)
-`terraform plan`
+
+## Terraform plan
+If the configuration is valid then the command `terraform plan` can be run. This command will compare the state file (what terraform thinks is deployed) to what is getting deployed with the configuration.  
+Because right now nothing is deployed and the state file is empty, it will show everything with a green + Symbol because everything is getting added.
 ![](./png/screenshots/terraform-plan.PNG)
 
-`terraform apply`
+Here is a short explanation of what the operator mean:  
 
-## Testing
+<span style="color:lightgreen">**+**</span> = resource is getting added  
+<span style="color:yellow">**~**</span>     = resource is getting changed  
+<span style="color:red">**-**</span>        = resource is getting destroyed  
+<span style="color:red">**-**</span> / <span style="color:lightgreen">**+**</span> = resource has to replaced (destroyed and then created)
+
+## Terraform apply
+To actual deploy the configuration the command `terraform apply` must be run.
+
+
+# Best practice
+
+It is best practice to run the command `terraform plan -out <name>.tfplan` first, so the changes are getting put out in a file, which later can be applied with the command `terraform apply <name>.tfplan`
+
+# Testing
 ## Reflection
