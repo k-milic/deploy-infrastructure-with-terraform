@@ -96,7 +96,6 @@ I will use the profile name "tbz-project"
 on Linux or MacOS you can use `export AWS_PROFILE=tbz-project`
 
 # Terraform infrastructure configuration
-
 ## Provider Registry
 Terraform has a website with documentations for most cloud providers and how to deploy their resources using terraform.
 
@@ -116,14 +115,39 @@ Every resource should have a documentation with an example configuration that ca
 
 ## My Configuration
 
-[main.tf](./infrastructure/main.tf)
+I created a directory called [infrastructrue](https://github.com/k-milic/deploy-infrastructure-with-terraform/blob/main/infrastructure) and placed all my configuration files in there.
+For security reasons I also added an .gitignore file, so my local state file and my lock file won't be submitted in this repository.
+
+### Terraform files
+[providers.tf](https://github.com/k-milic/deploy-infrastructure-with-terraform/blob/main/infrastructure/providers.tf)
+
+[network.tf](https://github.com/k-milic/deploy-infrastructure-with-terraform/blob/main/infrastructure/network.tf)
+
+[instances.tf](https://github.com/k-milic/deploy-infrastructure-with-terraform/blob/main/infrastructure/instances.tf)
+
+[s3.tf](https://github.com/k-milic/deploy-infrastructure-with-terraform/blob/main/infrastructure/s3.tf)
+
+[loadbalancer.tf](https://github.com/k-milic/deploy-infrastructure-with-terraform/blob/main/infrastructure/loadbalancer.tf)
+
+[locals.tf](https://github.com/k-milic/deploy-infrastructure-with-terraform/blob/main/infrastructure/locals.tf)
+
+[outputs.tf](https://github.com/k-milic/deploy-infrastructure-with-terraform/blob/main/infrastructure/outputs.tf)
+
+### Website file
+[/website/index.html](https://github.com/k-milic/deploy-infrastructure-with-terraform/blob/main/infrastructure/website/index.html)
 
 # Deploying terraform infrastructure
 
-`terraform init`
+After creating a terraform directory and terraform configuration files you can run the command `terraform init` to initialize the provider plugins and the backend for the terraform state file.  
 ![](./png/screenshots/terraform-init.PNG)
-`terraform fmt`
-`terraform validate`
+
+Running the command `terraform fmt` will format the congifuration to comply with the HCL formatting. This command is pretty much unnecessary if the HashiCorp Terraform extension for VC Code mentioned above is installed. The extensions is already taking care of the formatting if the file gets saved.
+
+The command `terraform validate` is checking if the congifuration is valid. It checks if the configuration makes sense and if all necessary informations are provided in the configuration and if the syntaxes and data types are correct.  
+
+If ther configuration is not valid, it will show where the error was found and what the possible error might be.
+
+Here it was looking for a string and I didn't use "" around ***tcp*** to specify it as a string.
 ![](./png/screenshots/terraform-validate-error.PNG)
 
 ![](./png/screenshots/terraform-validate-success.PNG)
