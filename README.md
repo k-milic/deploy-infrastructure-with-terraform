@@ -165,12 +165,12 @@ Because right now nothing is deployed and the state file is empty, it will show 
 ![](./png/screenshots/terraform-plan.PNG)
 
 Here is a short explanation of what the operator mean:  
-
+<p>
 <span style="color:lightgreen">**+**</span> = resource is getting added  
 <span style="color:yellow">**~**</span>     = resource is getting changed  
 <span style="color:red">**-**</span>        = resource is getting destroyed  
 <span style="color:red">**-**</span> / <span style="color:lightgreen">**+**</span> = resource has to replaced (destroyed and then created)
-
+</p>
 ## Terraform apply
 To actual deploy the configuration the command `terraform apply` must be run.
 
