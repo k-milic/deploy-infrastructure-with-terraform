@@ -166,18 +166,16 @@ Because right now nothing is deployed and the state file is empty, it will show 
 
 Here is a short explanation of what the operator mean:  
 
+
 <span style="color:lightgreen">**+**</span> = resource is getting added  
 <span style="color:yellow">**~**</span>     = resource is getting changed  
 <span style="color:red">**-**</span>        = resource is getting destroyed  
 <span style="color:red">**-**</span> / <span style="color:lightgreen">**+**</span> = resource has to replaced (destroyed and then created)
 
-<style>
-r { color: Red }
-o { color: Orange }
-g { color: Green }
-</style>
 
-<r>**+**</r> = resource is getting added  
+![](./png/screenshots/terraform-plan-status.PNG)
+
+
 ## Terraform apply
 To actual deploy the configuration the command `terraform apply` must be run.
 
