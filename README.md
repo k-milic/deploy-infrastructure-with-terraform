@@ -164,25 +164,74 @@ If the configuration is valid then the command `terraform plan` can be run. This
 Because right now nothing is deployed and the state file is empty, it will show everything with a green + Symbol because everything is getting added.
 ![](./png/screenshots/terraform-plan.PNG)
 
-Here is a short explanation of what the operator mean:  
-
-
-<span style="color:lightgreen">**+**</span> = resource is getting added  
-<span style="color:yellow">**~**</span>     = resource is getting changed  
-<span style="color:red">**-**</span>        = resource is getting destroyed  
-<span style="color:red">**-**</span> / <span style="color:lightgreen">**+**</span> = resource has to replaced (destroyed and then created)
-
+Here is a short explanation of what the different operator mean:  
 
 ![](./png/screenshots/terraform-plan-status.PNG)
 
 
 ## Terraform apply
-To actual deploy the configuration the command `terraform apply` must be run.
+To actually deploy the configuration the command `terraform apply` must be run.  
+Terraform will show the planned changes like with terraform plan but now the deployment has to be confirmed with **yes**. After that the current configuration is getting provisoned and the state file is getting updated to reflect the current state of the infrastructure.  
 
+![](./png/screenshots/terraform-apply.PNG)
 
-# Best practice
+After the deployment following message should appear:
 
-It is best practice to run the command `terraform plan -out <name>.tfplan` first, so the changes are getting put out in a file, which later can be applied with the command `terraform apply <name>.tfplan`
+![](./png/screenshots/terraform-apply-complete.PNG)
+
+In the outputs it's showing me the public DNS of the webserver.
+
+After entering the URL:
+http://webserver-alb-905079684.us-east-1.elb.amazonaws.com/  
+I can see that the Webservers are running my webserver configuration.  
+![](./png/screenshots/webserver-url.PNG)
+
+## Best practice for plan & apply
+
+It is best practice to run the command `terraform plan -out <name>.tfplan` first, so the changes are put out in a file. This file can later be applied with the command `terraform apply <name>.tfplan`
+
+## Terraform destroy
+
+To tear down the whole infrastructure the command `terraform destroy` can be run. This command should never be run mindlessly in a production environment!
+
+![](./png/screenshots/terraform-destroy.PNG)
+
+Terraform will ask to confirm this action with a **yes** before it starts tearing down the environment.
+
+![](./png/screenshots/terraform-destroy-yes.PNG)
+
 
 # Testing
-## Reflection
+
+The infrastructre was tested on **23.01.2022** by **Kevin Milic**.
+
+| Test  |  Result |
+|---|---|
+| What operating system is used for this test?  | Windows 10  |
+| Is the AWS CLI installed?  |  Yes |
+| What version of the AWS CLI is installed?  | The version `aws-cli/2.9.15 Python/3.9.11 Windows/10 exe/AMD64 prompt/off` is installed  |
+| Is Terraform installed? |  Yes |
+| What version of Terraform is currently installed? | The version `Terraform v1.3.7 on windows_amd64` is installed  |
+| Is the programmatic access to AWS possible?  | Yes  |
+| Is the given permission sufficient for provisioning infrastructure?  |  Yes |
+| Does the permissions follow the principle of least privilege | No  |
+| What backend type is used?  | Local backend |
+| Is the current Terraform configuration valid?  |  Yes |
+| How was the Terraform configuration applied?  | Manually in VS Code Terminal with the command `terraform plan` and then with `terraform apply`  |
+| Are the created resources visible in the AWS Management Console?| Yes |
+| Was a VPC with the CIDR Block **10.0.0.0/16** created? | Yes ![]()  |
+| Were 2 Subnets with the CIDR Block **10.0.0.0/24** & **10.0.1.0/24** created?| Yes  |
+| Were 2 VMs (EC2 Instances) created? | Yes |
+| Is each VM in a different subnet? | Yes |
+| Do both VMs have a public IP? If so, what is their public IP address?| Yes <br> VM1's IP is **3.236.153.191** <br>VM2's IP is **44.204.235.143**|
+| Is an Application Load Balancer provisioned? | Yes |
+| Is a S3 Bucket provisioned? | Yes |
+| Is the S3 Bucket holding an index.html file? | Yes |
+| Are both VMs (EC2 Instances) running on the latest Amazon Linux 2 AMI?| Yes |
+| Are both VMs running nginx? | Yes |
+| Are the webservers running the configuration from the S3 Bucket?  | Yes
+| Are the webservers reachable from public? | No. Not reachable by IP nor DNS. |
+| Is every resource using the tag "TBZ-Project" | [Yes](./png/screenshots/Test/Tags.PNG) |
+| After the test, did the command `terraform destroy` remove every single resource that was created? | Yes |
+
+# Reflection
