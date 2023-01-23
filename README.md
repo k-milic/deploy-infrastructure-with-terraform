@@ -183,7 +183,7 @@ In the outputs it's showing me the public DNS of the webserver.
 
 After entering the URL:
 http://webserver-alb-905079684.us-east-1.elb.amazonaws.com/  
-I can see that the Webservers are running my webserver configuration.  
+I can see that the webservers are running my webserver configuration.  
 ![](./png/screenshots/webserver-url.PNG)
 
 ## Best practice for plan & apply
@@ -200,10 +200,15 @@ Terraform will ask to confirm this action with a **yes** before it starts tearin
 
 ![](./png/screenshots/terraform-destroy-yes.PNG)
 
+After the destroy process following message should appear:
+
+![](./png/screenshots/terraform-destroy-complete.PNG)
+
 
 # Testing
 
 The infrastructre was tested on **23.01.2022** by **Kevin Milic**.
+
 
 | Test  |  Result |
 |---|---|
@@ -218,20 +223,26 @@ The infrastructre was tested on **23.01.2022** by **Kevin Milic**.
 | What backend type is used?  | Local backend |
 | Is the current Terraform configuration valid?  |  Yes |
 | How was the Terraform configuration applied?  | Manually in VS Code Terminal with the command `terraform plan` and then with `terraform apply`  |
-| Are the created resources visible in the AWS Management Console?| Yes |
-| Was a VPC with the CIDR Block **10.0.0.0/16** created? | Yes ![]()  |
-| Were 2 Subnets with the CIDR Block **10.0.0.0/24** & **10.0.1.0/24** created?| Yes  |
-| Were 2 VMs (EC2 Instances) created? | Yes |
-| Is each VM in a different subnet? | Yes |
+| Are the created resources visible in the AWS Management Console?| [Yes](./png/screenshots/Test/resources-aws.PNG) |
+| Was a VPC with the CIDR Block **10.0.0.0/16** created? | [Yes](./png/screenshots/Test/VPC.PNG)  |
+| Were 2 Subnets with the CIDR Block **10.0.0.0/24** & **10.0.1.0/24** created?| [Yes](./png/screenshots/Test/Subnets.PNG)  |
+| Were 2 VMs (EC2 Instances) created? | [Yes](./png/screenshots/Test/Instances.PNG) |
+| Is each VM in a different subnet? | Yes. <br> [VM1](./png/screenshots/Test/VM1-subnet-ip.PNG) , [VM2](./png/screenshots/Test/VM2-subnet-ip.PNG)|
 | Do both VMs have a public IP? If so, what is their public IP address?| Yes <br> VM1's IP is **3.236.153.191** <br>VM2's IP is **44.204.235.143**|
-| Is an Application Load Balancer provisioned? | Yes |
-| Is a S3 Bucket provisioned? | Yes |
-| Is the S3 Bucket holding an index.html file? | Yes |
-| Are both VMs (EC2 Instances) running on the latest Amazon Linux 2 AMI?| Yes |
+| Is an Application Load Balancer provisioned? | [Yes](./png/screenshots/Test/ALB.PNG) |
+| Is a S3 Bucket provisioned? | [Yes](./png/screenshots/Test/S3.PNG) |
+| Is the S3 Bucket holding an index.html file? | [Yes](./png/screenshots/Test/S3-objects.PNG) |
+| Are both VMs (EC2 Instances) running on the latest Amazon Linux 2 AMI?| [Yes](./png/screenshots/Test/AMI.PNG) |
 | Are both VMs running nginx? | Yes |
-| Are the webservers running the configuration from the S3 Bucket?  | Yes
-| Are the webservers reachable from public? | No. Not reachable by IP nor DNS. |
+| Are the webservers running the configuration from the S3 Bucket?  | [Yes](./png/screenshots/webserver-url.PNG)
+| Are the webservers reachable from public? | No. <br> Not reachable by [IP](./png/screenshots/Test/Not-reachable-from-public-by-ip.PNG) nor [DNS](./png/screenshots/Test/Not-reachable-from-public-by-dns.PNG). <br> Only reachable through Application Load Balancer. |
 | Is every resource using the tag "TBZ-Project" | [Yes](./png/screenshots/Test/Tags.PNG) |
 | After the test, did the command `terraform destroy` remove every single resource that was created? | Yes |
 
-# Reflection
+# Final words / Reflection
+
+At the beginning of the cloud-native bootcamp we got told that there will be a final project, so I had time in advance to think about a project idea. In the past 6 months I really deep dived into the topic cloud and DevOps and spent a lot of free time learning about these topics. I also went ahead and studied for 7 cloud related IT certifications and passed. I did this to improve my market value and to get a role in cloud.
+
+This project was much harder than I expected it to be. It took a lot of time researching and documenting the whole project. I really want to thank [Wahl Network](https://www.youtube.com/@WahlnetworkPage/videos) and [Ned Bellevance](https://www.youtube.com/@NedintheCloud/videos) for covering Terraform in their videos. Also The Terraform course on Plurasight played a big part in this. Without those resources this would not have been possible. 
+
+This project really helped me to get more hands-on experience with GIT, IaC and Cloud. I hope this project will help me building up my resume and land a role in cloud.
