@@ -56,7 +56,7 @@ To get help with syntax validation or code formatting it is strongly recommended
 The extension is called "HashiCorp Terraform" and can be found in the Visual Studio Code Marketplace through the Extensions Tab.  
 
 ![](./png/screenshots/vscode-ext.PNG)  
-The extension can also be downloaded directly through this link:
+The extension can also be downloaded directly through this link:  
 https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform
 
 
@@ -243,6 +243,6 @@ The infrastructre was tested on **23.01.2022** by **Kevin Milic**.
 
 At the beginning of the cloud-native bootcamp we got told that there will be a final project, so I had time in advance to think about a project idea. In the past 6 months I really deep dived into the topic cloud and DevOps and spent a lot of free time learning about these topics. I also went ahead and studied for 7 cloud related IT certifications and passed. I did this to improve my market value and to get a role in cloud.
 
-This project was much harder than I expected it to be. It took a lot of time researching and documenting the whole project. I really want to thank [Wahl Network](https://www.youtube.com/@WahlnetworkPage/videos) and [Ned Bellevance](https://www.youtube.com/@NedintheCloud/videos) for covering Terraform in their videos. Also The Terraform course on Plurasight played a big part in this. Without those resources this would not have been possible. 
+This project was much harder than I expected it to be. It took a lot of time researching and documenting the whole project. I really want to thank [Wahl Network](https://www.youtube.com/@WahlnetworkPage/videos) and [Ned Bellevance](https://www.youtube.com/@NedintheCloud/videos) for covering Terraform in their videos. Also The Terraform course on Pluralsight played a big part in this. Without those resources this would not have been possible. 
 
 This project really helped me to get more hands-on experience with GIT, IaC and Cloud. I hope this project will help me building up my resume and land a role in cloud.
