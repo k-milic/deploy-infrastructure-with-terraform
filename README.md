@@ -110,7 +110,7 @@ In the documentation it's showing us already how to use the provider block
 
 this configuration block can be copy & pasted in a terraform file ending with .tf for example in a file called main.tf or provider.tf.
 
-This can be done for all the other resources (VMs, VPCs, Subnets, Security gropus etc.)  
+This can be done for all the other resources (VMs, VPCs, Subnets, Security groups etc.)  
 Every resource should have a documentation with an example configuration that can be used and adjusted.
 
 ## My Configuration
