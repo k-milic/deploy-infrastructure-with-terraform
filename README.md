@@ -70,7 +70,7 @@ So that Terraform is able to provision things an access ID and a secret access k
 Enable **Access key - Programmatic access**
 ![](./png/screenshots/aws-create-user1.png)
 5. Click **Next: Permissions**
-6. Choose **AtTach existing policies directly** and select **Administrator Access**
+6. Choose **Attach existing policies directly** and select **Administrator Access**
 7. Click **Next: Tags**
 8. Click **Next: Review**
 9. Click **Create user**
